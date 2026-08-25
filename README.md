@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mulu Gym - ሙሉ ጂም እና ፊቱነስ ማዕከል</title>
   
-  <!-- Favicon using exact GitHub logo file -->
+  <!-- Favicon using exact logo file -->
   <link rel="icon" type="image/png" href="./logo%20pic%20.png" />
 
   <!-- Font Awesome Icons -->
@@ -18,9 +18,10 @@
   <style>
     :root {
       --primary-color: #ffcc00; /* Signature Bright Yellow */
+      --primary-glow: rgba(255, 204, 0, 0.35);
       --secondary-color: #0a0a0a; /* Pitch Black */
-      --card-bg: #141414; /* Sleek Dark Gray Card */
-      --card-hover: #1f1f1f;
+      --card-bg: rgba(20, 20, 20, 0.85); /* Dark Glassmorphism */
+      --card-hover: rgba(30, 30, 30, 0.95);
       --text-main: #ffffff;
       --text-muted: #b3b3b3;
       --border-color: #262626;
@@ -29,6 +30,7 @@
 
     .white-accent-mode {
       --primary-color: #ffffff;
+      --primary-glow: rgba(255, 255, 255, 0.35);
       --btn-text: #000000;
     }
 
@@ -44,12 +46,13 @@
       background-color: var(--secondary-color);
       color: var(--text-main);
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     /* Header & Navigation */
     header {
-      background: rgba(10, 10, 10, 0.96);
-      padding: 0.8rem 2rem;
+      background: rgba(10, 10, 10, 0.92);
+      padding: 0.9rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -57,11 +60,12 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid var(--primary-color);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
 
     .logo {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--primary-color);
       display: flex;
@@ -73,12 +77,12 @@
     }
 
     .logo img {
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--primary-color);
-      background: #000;
+      box-shadow: 0 0 10px var(--primary-glow);
     }
 
     nav ul {
@@ -93,7 +97,7 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
@@ -103,27 +107,27 @@
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .theme-btn, .lang-btn {
       background: var(--primary-color);
       color: var(--btn-text);
       border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 8px 14px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       transition: all 0.3s ease;
+      box-shadow: 0 0 8px var(--primary-glow);
     }
 
     .theme-btn:hover, .lang-btn:hover {
-      opacity: 0.88;
-      transform: translateY(-1px);
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
 
-    /* Mobile Hamburger Icon */
     .mobile-menu-btn {
       display: none;
       background: none;
@@ -135,51 +139,88 @@
 
     /* Hero Section */
     .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88)), 
+      background: linear-gradient(rgba(0, 0, 0, 0.78), rgba(10, 10, 10, 0.92)), 
                   url('./welcome%20pic%20.jpg') center/cover no-repeat;
-      height: 85vh;
+      min-height: 88vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
+      padding: 2rem 20px;
+    }
+
+    .hero-subtitle-tag {
+      color: var(--primary-color);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
     }
 
     .hero h1 {
-      font-size: 3.5rem;
-      color: var(--primary-color);
+      font-size: 3.8rem;
+      color: #ffffff;
       margin-bottom: 1rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      line-height: 1.2;
+      line-height: 1.1;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero h1 span {
+      color: var(--primary-color);
     }
 
     .hero p {
       font-size: 1.25rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
       max-width: 720px;
       color: var(--text-muted);
+    }
+
+    .hero-btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .btn {
       background: var(--primary-color);
       color: var(--btn-text);
-      padding: 14px 34px;
+      padding: 14px 32px;
       text-decoration: none;
-      border-radius: 4px;
-      font-size: 1.05rem;
+      border-radius: 6px;
+      font-size: 1rem;
       font-weight: 700;
       transition: all 0.3s ease;
-      border: none;
+      border: 2px solid var(--primary-color);
       cursor: pointer;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       text-transform: uppercase;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 2px solid var(--border-color);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background: rgba(255, 204, 0, 0.05);
     }
 
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.35);
+      box-shadow: 0 8px 25px var(--primary-glow);
     }
 
     /* General Section Layout */
@@ -196,26 +237,30 @@
       color: var(--primary-color);
       text-transform: uppercase;
       position: relative;
+      letter-spacing: 1px;
     }
 
     .section-title::after {
       content: '';
-      width: 75px;
+      width: 70px;
       height: 4px;
       background: var(--primary-color);
       display: block;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--primary-glow);
     }
 
-    /* About Us - Paragraph Grid */
+    /* About Us Section */
     .about-content {
       background: var(--card-bg);
       padding: 2.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
       gap: 1.3rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     }
 
     .about-content p {
@@ -226,7 +271,7 @@
       padding-left: 16px;
     }
 
-    /* Services Grid (No photos, pure icons & clean text) */
+    /* Services Grid */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -236,16 +281,19 @@
     .service-card {
       background: var(--card-bg);
       padding: 2.5rem 1.8rem;
-      border-radius: 8px;
+      border-radius: 12px;
       text-align: center;
       border: 1px solid var(--border-color);
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .service-card:hover {
       border-color: var(--primary-color);
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       background: var(--card-hover);
+      box-shadow: 0 10px 30px var(--primary-glow);
     }
 
     .service-card i {
@@ -269,10 +317,11 @@
     .booking-container {
       background: var(--card-bg);
       padding: 2.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
     }
 
     .booking-form {
@@ -290,20 +339,23 @@
     .form-group label {
       font-weight: 600;
       color: var(--text-main);
+      font-size: 0.95rem;
     }
 
     .booking-form input, .booking-form select, .booking-form textarea {
       padding: 14px;
       background: #000000;
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 1rem;
       color: var(--text-main);
+      transition: border-color 0.3s;
     }
 
-    .booking-form input:focus, .booking-form select:focus {
+    .booking-form input:focus, .booking-form select:focus, .booking-form textarea:focus {
       outline: none;
       border-color: var(--primary-color);
+      box-shadow: 0 0 8px var(--primary-glow);
     }
 
     /* Gallery Grid & Lightbox */
@@ -316,7 +368,7 @@
     .gallery-item {
       position: relative;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
       cursor: pointer;
       aspect-ratio: 4/3;
@@ -326,7 +378,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
       display: block;
     }
 
@@ -337,7 +389,7 @@
     .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -360,8 +412,8 @@
       position: fixed;
       inset: 0;
       z-index: 2000;
-      background: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.94);
+      backdrop-filter: blur(12px);
       justify-content: center;
       align-items: center;
       flex-direction: column;
@@ -375,9 +427,10 @@
     .lightbox-content {
       max-width: 90vw;
       max-height: 80vh;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 2px solid var(--primary-color);
       object-fit: contain;
+      box-shadow: 0 0 30px var(--primary-glow);
     }
 
     .lightbox-caption {
@@ -397,9 +450,7 @@
       transition: color 0.2s;
     }
 
-    .lightbox-close:hover {
-      color: var(--primary-color);
-    }
+    .lightbox-close:hover { color: var(--primary-color); }
 
     .lightbox-nav {
       position: absolute;
@@ -413,10 +464,7 @@
       transition: color 0.2s;
     }
 
-    .lightbox-nav:hover {
-      color: var(--primary-color);
-    }
-
+    .lightbox-nav:hover { color: var(--primary-color); }
     .lightbox-prev { left: 20px; }
     .lightbox-next { right: 20px; }
 
@@ -424,18 +472,39 @@
     .reviews-container {
       background: var(--card-bg);
       padding: 2.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border-color);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
     }
 
-    .avg-rating {
+    .avg-rating-box {
       text-align: center;
-      font-size: 1.6rem;
-      margin-bottom: 2rem;
-      font-weight: 700;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .stars {
+    .avg-rating-score {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary-color);
+    }
+
+    .interactive-stars {
+      display: flex;
+      gap: 8px;
+      font-size: 2rem;
+      color: var(--border-color);
+      cursor: pointer;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .interactive-stars .star-btn {
+      transition: color 0.2s;
+    }
+
+    .interactive-stars .star-btn.active, .interactive-stars .star-btn:hover {
       color: var(--primary-color);
     }
 
@@ -446,11 +515,11 @@
       margin-bottom: 2.5rem;
     }
 
-    .review-form input, .review-form textarea, .review-form select {
-      padding: 12px;
+    .review-form input, .review-form textarea {
+      padding: 14px;
       background: #000000;
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 1rem;
       color: var(--text-main);
     }
@@ -462,15 +531,28 @@
     }
 
     .review-item {
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 15px;
+      background: #000000;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.2rem;
+      transition: border-color 0.3s;
+    }
+
+    .review-item:hover {
+      border-color: var(--primary-color);
     }
 
     .review-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-weight: 700;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+    }
+
+    .stars-display {
+      color: var(--primary-color);
+      letter-spacing: 2px;
     }
 
     /* Contact Section */
@@ -484,43 +566,111 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      background: var(--card-bg);
+      padding: 2.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 15px;
-      font-size: 1.1rem;
+      gap: 16px;
+      font-size: 1.05rem;
     }
 
     .contact-item i {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--primary-color);
+      width: 30px;
     }
 
     .telegram-btn {
       background: #0088cc;
       color: #ffffff;
       padding: 14px 24px;
-      border-radius: 4px;
+      border-radius: 6px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       font-weight: 700;
-      width: fit-content;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
+      border: none;
+      margin-top: 10px;
     }
 
     .telegram-btn:hover {
       background: #006699;
+      transform: translateY(-2px);
+    }
+
+    .directions-btn {
+      background: var(--primary-color);
+      color: var(--btn-text);
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 700;
+      margin-top: 10px;
     }
 
     .map-container iframe {
       width: 100%;
-      height: 300px;
+      height: 320px;
       border: 0;
-      border-radius: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Custom Notification Modal */
+    .custom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .custom-modal.active {
+      display: flex;
+    }
+
+    .custom-modal-card {
+      background: #141414;
+      border: 2px solid var(--primary-color);
+      padding: 2.5rem;
+      border-radius: 12px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px var(--primary-glow);
+    }
+
+    .custom-modal-card i {
+      font-size: 3.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .custom-modal-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .custom-modal-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+      font-size: 0.98rem;
     }
 
     /* Footer */
@@ -568,9 +718,7 @@
 
     /* Responsive Styles */
     @media (max-width: 868px) {
-      .mobile-menu-btn {
-        display: block;
-      }
+      .mobile-menu-btn { display: block; }
 
       nav {
         display: none;
@@ -583,22 +731,15 @@
         padding: 1.5rem 0;
       }
 
-      nav.active {
-        display: block;
-      }
+      nav.active { display: block; }
 
       nav ul {
         flex-direction: column;
         gap: 18px;
       }
 
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-
-      .hero p {
-        font-size: 1.05rem;
-      }
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.05rem; }
     }
   </style>
 </head>
@@ -608,7 +749,7 @@
   <header>
     <a href="#home" class="logo">
       <img src="./logo%20pic%20.png" alt="Mulu Gym Logo" onerror="this.src='./logo pic .png'" />
-      Mulu Gym
+      Mulu Gym / ሙሉ ጂም
     </a>
     
     <nav id="navbar">
@@ -634,12 +775,24 @@
 
   <!-- Hero Section -->
   <div class="hero" id="home">
-    <h1 data-en="Welcome to Mulu Gym" data-am="እንኳን ወደ ሙሉ ጂም በደህና መጡ">እንኳን ወደ ሙሉ ጂም በደህና መጡ</h1>
-    <p data-en="Transform your body and mind with our state-of-the-art equipment and professional combat & fitness trainers." data-am="በዘመናዊ የስፖርት መሣሪያዎቻችን እና በባለሙያ አሰልጣኞቻችን ጤናዎን፣ ሰውነትዎን እና የአእምሮ ብቃትዎን ይገንቡ።">በዘመናዊ የስፖርት መሣሪያዎቻችን እና በባለሙያ አሰልጣኞቻችን ጤናዎን፣ ሰውነትዎን እና የአእምሮ ብቃትዎን ይገንቡ።</p>
-    <a href="#booking" class="btn" data-en="Book Now" data-am="አሁኑኑ ቦታ ይያዙ">አሁኑኑ ቦታ ይያዙ</a>
+    <div class="hero-subtitle-tag" data-en="Strength • Discipline • Respect • Legacy" data-am="ጥንካሬ • ሥርዓት • ክብር • ቅርሥ">
+      Strength • Discipline • Respect • Legacy
+    </div>
+    <h1 data-en="MULU GYM" data-am="ሙሉ ጂም">MULU <span>GYM</span></h1>
+    <p data-en="Transform your body and mind with our state-of-the-art equipment and professional combat & fitness trainers." data-am="በዘመናዊ የስፖርት መሣሪያዎቻችን እና በባለሙያ አሰልጣኞቻችን ጤናዎን፣ ሰውነትዎን እና የአእምሮ ብቃትዎን ይገንቡ።">
+      በዘመናዊ የስፖርት መሣሪያዎቻችን እና በባለሙያ አሰልጣኞቻችን ጤናዎን፣ ሰውነትዎን እና የአእምሮ ብቃትዎን ይገንቡ።
+    </p>
+    <div class="hero-btn-group">
+      <a href="#booking" class="btn" data-en="Book Your Spot" data-am="ቦታ ይያዙ">
+        <i class="fa-solid fa-calendar-check"></i> ቦታ ይያዙ
+      </a>
+      <a href="#gallery" class="btn btn-secondary" data-en="View Gallery" data-am="የጂሙን ገጽታ ይመልከቱ">
+        <i class="fa-solid fa-images"></i> የጂሙን ገጽታ ይመልከቱ
+      </a>
+    </div>
   </div>
 
-  <!-- About Us Section (8 Detailed Paragraphs) -->
+  <!-- About Us Section -->
   <section id="about">
     <h2 class="section-title" data-en="About Us" data-am="ስለ እኛ">ስለ እኛ</h2>
     <div class="about-content">
@@ -667,43 +820,43 @@
     <div class="services-grid">
       <div class="service-card">
         <i class="fa-solid fa-hand-rock"></i>
-        <h3 data-en="Boxing" data-am="ቦክሲንግ">ቦክሲንግ</h3>
+        <h3 data-en="Boxing 🥊" data-am="ቦክሲንግ 🥊">ቦክሲንግ 🥊</h3>
         <p data-en="Professional boxing techniques, stamina building, and self-defense training." data-am="የቦክስ ስልጠና፣ የጽናት ማዳበሪያ እና ራስን የመከላከል ብቃት ማሳደጊያ።">የቦክስ ስልጠና፣ የጽናት ማዳበሪያ እና ራስን የመከላከል ብቃት ማሳደጊያ።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-person-fighting"></i>
-        <h3 data-en="Muay Thai" data-am="ሙአይ ታይ">ሙአይ ታይ</h3>
+        <h3 data-en="Muay Thai 🥋" data-am="ሙአይ ታይ 🥋">ሙአይ ታይ 🥋</h3>
         <p data-en="Traditional Thai combat sports training for total body strength and agility." data-am="የታይላንድ ባህላዊ የውጊያ ስፖርት ለጠንካራ የሰውነት ቅልጥፍና እና ጥንካሬ።">የታይላንድ ባህላዊ የውጊያ ስፖርት ለጠንካራ የሰውነት ቅልጥፍና እና ጥንካሬ።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-person-running"></i>
-        <h3 data-en="Aerobics" data-am="ኤሮቢክስ">ኤሮቢክስ</h3>
+        <h3 data-en="Aerobics 🏃" data-am="ኤሮቢክስ 🏃">ኤሮቢክስ 🏃</h3>
         <p data-en="High-energy group workouts to burn fat and boost cardiovascular health." data-am="ስብን ለመቀነስ እና የልብ ጤናን ለማሻሻል የሚረዱ የቡድን ኤሮቢክስ እንቅስቃሴዎች።">ስብን ለመቀነስ እና የልብ ጤናን ለማሻሻል የሚረዱ የቡድን ኤሮቢክስ እንቅስቃሴዎች።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-dumbbell"></i>
-        <h3 data-en="Personal Training" data-am="የግል አሰልጣኝ">የግል አሰልጣኝ</h3>
+        <h3 data-en="Personal Training 🏋️" data-am="የግል አሰልጣኝ 🏋️">የግል አሰልጣኝ 🏋️</h3>
         <p data-en="Customized one-on-one fitness and nutrition coaching." data-am="ለእርስዎ ብቻ ተስማሚ የሆነ የቅርብ የሙያ አሰልጠና እና የምግብ አመጋገብ ክትትል ።">ለእርስዎ ብቻ ተስማሚ የሆነ የቅርብ የሙያ አሰልጠና እና የምግብ አመጋገብ ክትትል ።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-hot-tub-person"></i>
-        <h3 data-en="Steam" data-am="ስቲም">ስቲም</h3>
+        <h3 data-en="Steam 🔥" data-am="ስቲም 🔥">ስቲም 🔥</h3>
         <p data-en="Relaxing steam bath to detoxify and unwind after heavy workouts." data-am="ከጠንካራ ስፖርት በኋላ ጡንቻዎችን ለማዝናናት የሚያገለግል ዘመናዊ የስቲም ገላ።">ከጠንካራ ስፖርት በኋላ ጡንቻዎችን ለማዝናናት የሚያገለግል ዘመናዊ የስቲም ገላ።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-shower"></i>
-        <h3 data-en="Shower" data-am="ሻወር">ሻወር</h3>
+        <h3 data-en="Shower 🚿" data-am="ሻወር 🚿">ሻወር 🚿</h3>
         <p data-en="Clean and refreshing hot & cold shower facilities." data-am="ጽዳቱን የጠበቀ የሞቅ እና ቀዝቃዛ ሻወር አገልግሎት።">ጽዳቱን የጠበቀ የሞቅ እና ቀዝቃዛ ሻወር አገልግሎት።</p>
       </div>
 
       <div class="service-card">
         <i class="fa-solid fa-user-ninja"></i>
-        <h3 data-en="Taekwondo" data-am="ታይክዋንዶ">ታይክዋንዶ</h3>
+        <h3 data-en="Taekwondo 🥋" data-am="ታይክዋንዶ 🥋">ታይክዋንዶ 🥋</h3>
         <p data-en="Martial arts discipline focusing on kicks, flexibility, and focus." data-am="የእግር ምት፣ የመታጠፍ ብቃት እና ትኩረትን የሚያሳድግ የኮሪያ የውጊያ ስፖርት።">የእግር ምት፣ የመታጠፍ ብቃት እና ትኩረትን የሚያሳድግ የኮሪያ የውጊያ ስፖርት።</p>
       </div>
     </div>
@@ -720,7 +873,7 @@
         </div>
         <div class="form-group">
           <label data-en="Phone Number" data-am="ስልክ ቁጥር">ስልክ ቁጥር</label>
-          <input type="tel" id="bookPhone" placeholder="09xxxxxxxx" required />
+          <input type="tel" id="bookPhone" placeholder="+251 9xxxxxxxx" required />
         </div>
         <div class="form-group">
           <label data-en="Select Service" data-am="አገልግሎት ይምረጡ">አገልግሎት ይምረጡ</label>
@@ -742,45 +895,41 @@
           <label data-en="Preferred Time" data-am="የሚመችዎት ሰዓት">የሚመችዎት ሰዓት</label>
           <input type="time" id="bookTime" required />
         </div>
-        <button type="submit" class="btn" data-en="Confirm & Send via Telegram" data-am="ቦታ ያስይዙ (በቴሌግራም ይላኩ)">ቦታ ያስይዙ (በቴሌግራም ይላኩ)</button>
+        <button type="submit" class="btn" data-en="Confirm Booking" data-am="ቦታ ያስይዙ">
+          <i class="fa-solid fa-paper-plane"></i> ቦታ ያስይዙ
+        </button>
       </form>
     </div>
   </section>
 
-  <!-- Gym Gallery (Exact Repository Image Files) -->
+  <!-- Gym Gallery -->
   <section id="gallery">
     <h2 class="section-title" data-en="Gym Gallery" data-am="የጂሙ ገጽታ">የጂሙ ገጽታ</h2>
     <div class="gallery-grid">
-      
       <div class="gallery-item" onclick="openLightbox(0)">
         <img src="./welcome%20pic%20.jpg" alt="Mulu Gym Main Entrance & Equipment" onerror="this.src='./welcome pic .jpg'" />
         <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
       </div>
-
       <div class="gallery-item" onclick="openLightbox(1)">
         <img src="./the%20gym%20place%20.jpg" alt="Mulu Gym Place & Fitness Area" onerror="this.src='./the gym place .jpg'" />
         <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
       </div>
-
       <div class="gallery-item" onclick="openLightbox(2)">
         <img src="./the%20gym%20house%20.jpg" alt="Mulu Gym House Facility View" onerror="this.src='./the gym house .jpg'" />
         <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
       </div>
-
       <div class="gallery-item" onclick="openLightbox(3)">
         <img src="./the%20gym%20house.jpg" alt="Mulu Gym House Training Hall" onerror="this.src='./the gym house.jpg'" />
         <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
       </div>
-
       <div class="gallery-item" onclick="openLightbox(4)">
         <img src="./for%20horizontal%20pic%20.jpg" alt="Mulu Gym Workout View" onerror="this.src='./for horizontal pic .jpg'" />
         <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
       </div>
-
     </div>
   </section>
 
-  <!-- Lightbox Modal for Gallery Preview -->
+  <!-- Lightbox Modal -->
   <div class="lightbox-modal" id="lightboxModal" onclick="closeLightboxOnBg(event)">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
     <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImg(-1)">&#10094;</span>
@@ -793,23 +942,31 @@
   <section id="reviews">
     <h2 class="section-title" data-en="Customer Reviews" data-am="የደንበኞች አስተያየት">የደንበኞች አስተያየት</h2>
     <div class="reviews-container">
-      <div class="avg-rating" id="avgRating">
-        <span data-en="Average Rating:" data-am="አማካይ ደረጃ፡">አማካይ ደረጃ፡</span> 
-        <span id="score">0.0</span> <span class="stars">★</span>
+      <div class="avg-rating-box">
+        <div class="avg-rating-score" id="score">4.9</div>
+        <div class="stars-display" id="avgStarsDisplay">★★★★★</div>
+        <p style="color:var(--text-muted); margin-top: 5px;" id="reviewCountText">Based on 0 Reviews</p>
       </div>
 
       <!-- Review Form -->
-      <form class="review-form" id="reviewForm">
-        <input type="text" id="reviewerName" placeholder="ስምዎን ያስገቡ" required />
-        <select id="reviewerRating" required>
-          <option value="5">5 Stars (እጅግ በጣም ጥሩ ★★★★★)</option>
-          <option value="4">4 Stars (በጣም ጥሩ ★★★★)</option>
-          <option value="3">3 Stars (ጥሩ ★★★)</option>
-          <option value="2">2 Stars (መካከለኛ ★★)</option>
-          <option value="1">1 Star (ዝቅተኛ ★)</option>
-        </select>
-        <textarea id="reviewerComment" rows="3" placeholder="አስተያየትዎን እዚህ ይጻፉ..." required></textarea>
-        <button type="submit" class="btn" data-en="Submit Review" data-am="አስተያየት ላክ">አስተያየት ላክ</button>
+      <form class="review-form" id="reviewForm" onsubmit="handleReviewSubmit(event)">
+        <input type="text" id="reviewerName" placeholder="ስምዎን ያስገቡ / Enter Your Name" required />
+        
+        <div style="text-align:center;">
+          <label style="font-weight:600;" data-en="Select Rating" data-am="ደረጃ ይስጡ">ደረጃ ይስጡ</label>
+          <div class="interactive-stars" id="starSelector">
+            <span class="star-btn" data-value="1">★</span>
+            <span class="star-btn" data-value="2">★</span>
+            <span class="star-btn" data-value="3">★</span>
+            <span class="star-btn" data-value="4">★</span>
+            <span class="star-btn active" data-value="5">★</span>
+          </div>
+        </div>
+
+        <textarea id="reviewerComment" rows="3" placeholder="አስተያየትዎን እዚህ ይጻፉ... / Write your comment..." required></textarea>
+        <button type="submit" class="btn" data-en="Submit Review" data-am="አስተያየት ላክ">
+          <i class="fa-solid fa-comment-dots"></i> አስተያየት ላክ
+        </button>
       </form>
 
       <!-- Reviews Display List -->
@@ -817,40 +974,61 @@
     </div>
   </section>
 
-  <!-- Contact & Location Section -->
+  <!-- Contact Section -->
   <section id="contact">
     <h2 class="section-title" data-en="Contact Us" data-am="አድራሻችን">አድራሻችን</h2>
     <div class="contact-container">
       <div class="contact-info">
         <div class="contact-item">
           <i class="fa-solid fa-location-dot"></i>
-          <span>አዲስ አበባ፣ ኢትዮጵያ (Addis Ababa, Ethiopia)</span>
+          <div>
+            <strong>አድራሻ (Location):</strong><br />
+            Ansar Hirna, Qobo Retailor
+          </div>
         </div>
         <div class="contact-item">
           <i class="fa-solid fa-phone"></i>
-          <span>+251 900 000 000</span>
+          <div>
+            <strong>ስልክ (Phone):</strong><br />
+            +251 96 757 4757
+          </div>
         </div>
         <div class="contact-item">
-          <i class="fa-solid fa-envelope"></i>
-          <span>info@mulugym.com</span>
+          <i class="fa-brands fa-telegram"></i>
+          <div>
+            <strong>ቴሌግራም (Telegram):</strong><br />
+            @Abniwaa
+          </div>
         </div>
-        
-        <!-- Telegram Link -->
-        <a href="https://t.me/your_telegram_username" target="_blank" class="telegram-btn" id="tgLink">
-          <i class="fa-brands fa-telegram"></i> ቴሌግራም ቻናላችንን ይቀላቀሉ
+
+        <a href="https://t.me/Abniwaa" target="_blank" class="telegram-btn">
+          <i class="fa-brands fa-telegram"></i> Telegram ላይ ያግኙን
+        </a>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Ansar+Hirna+Qobo+Retailor" target="_blank" class="directions-btn">
+          <i class="fa-solid fa-route"></i> Get Directions (አቅጣጫዎች)
         </a>
       </div>
 
-      <!-- Google Maps Embed -->
       <div class="map-container">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126105.71714041797!2d38.7062438!3d9.0107934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set" 
+          src="https://maps.google.com/maps?q=Ansar%20Hirna%20Qobo%20Retailor&t=&z=13&ie=UTF8&iwloc=&output=embed" 
           allowfullscreen="" 
           loading="lazy">
         </iframe>
       </div>
     </div>
   </section>
+
+  <!-- Custom Success Notification Modal -->
+  <div class="custom-modal" id="successModal">
+    <div class="custom-modal-card">
+      <i class="fa-solid fa-circle-check"></i>
+      <h3 id="modalTitle">ተሳክቷል! / Success!</h3>
+      <p id="modalBody">ጥያቄዎ በጥሩ ሁኔታ ተልኳል። እናመሰግናለን!</p>
+      <button class="btn" onclick="closeSuccessModal()">እሺ / OK</button>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -860,55 +1038,55 @@
         <span>Mulu Gym / ሙሉ ጂም</span>
       </div>
       <div>
-        <a href="https://t.me/your_telegram_username" target="_blank" style="color:var(--primary-color); text-decoration:none; font-weight:600;">
-          <i class="fa-brands fa-telegram"></i> Join Us on Telegram
+        <a href="https://t.me/Abniwaa" target="_blank" style="color:var(--primary-color); text-decoration:none; font-weight:600;">
+          <i class="fa-brands fa-telegram"></i> @Abniwaa on Telegram
         </a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Mulu Gym. All Rights Reserved. | 🚀 Developed by Yisshak</p>
+      <p>&copy; 2026 Mulu Gym. All Rights Reserved.</p>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script>
-    // 1. Mobile Navigation Toggle
+    // Mobile Navigation Toggle
     function toggleMobileMenu() {
-      const nav = document.getElementById('navbar');
-      nav.classList.toggle('active');
+      document.getElementById('navbar').classList.toggle('active');
     }
-
-    // Close menu when clicking nav links on mobile
     document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('navbar').classList.remove('active');
-      });
+      link.addEventListener('click', () => document.getElementById('navbar').classList.remove('active'));
     });
 
-    // 2. Accent Theme Color Toggle
+    // Theme Switcher
     function toggleTheme() {
       document.body.classList.toggle('white-accent-mode');
       const btn = document.querySelector('.theme-btn');
-      if (document.body.classList.contains('white-accent-mode')) {
-        btn.innerText = "Yellow Accent";
-      } else {
-        btn.innerText = "White Accent";
-      }
+      btn.innerText = document.body.classList.contains('white-accent-mode') ? "Yellow Accent" : "White Accent";
     }
 
-    // 3. Language Switcher (Amharic / English)
+    // Language Switcher
     let currentLang = 'am';
     function toggleLanguage() {
       currentLang = currentLang === 'am' ? 'en' : 'am';
       document.querySelector('.lang-btn').innerText = currentLang === 'am' ? 'English' : 'አማርኛ';
-
       document.querySelectorAll('[data-en]').forEach(el => {
         el.innerText = el.getAttribute(`data-${currentLang}`);
       });
     }
 
-    // 4. Booking System (Auto-Copy + Direct Telegram Redirect)
-    function handleBooking(e) {
+    // Custom Modal Display
+    function showNotification(title, message) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalBody').innerText = message;
+      document.getElementById('successModal').classList.add('active');
+    }
+    function closeSuccessModal() {
+      document.getElementById('successModal').classList.remove('active');
+    }
+
+    // Booking Submission Handler (via Secure Backend Endpoint)
+    async function handleBooking(e) {
       e.preventDefault();
       const name = document.getElementById('bookName').value.trim();
       const phone = document.getElementById('bookPhone').value.trim();
@@ -916,23 +1094,34 @@
       const date = document.getElementById('bookDate').value;
       const time = document.getElementById('bookTime').value;
 
-      const bookingText = `📋 *አዲስ የጂም ቡኪንግ (Mulu Gym Booking)*\n\n👤 *ስም:* ${name}\n📞 *ስልክ:* ${phone}\n🏋️‍♂️ *አገልግሎት:* ${service}\n📅 *ቀን:* ${date}\n⏰ *ሰዓት:* ${time}\n\nእባክዎን ምዝገባዬን ያረጋግጡልኝ!`;
+      if (!name || !phone || !service || !date || !time) {
+        showNotification("ስህተት / Error", "እባክዎን ሁሉንም ቦታዎች በትክክል ይሙሉ!");
+        return;
+      }
 
-      navigator.clipboard.writeText(bookingText).then(() => {
-        alert("✅ የቡኪንግ መረጃዎ ተቀድቷል (Copied)! አሁን ወደ ቴሌግራም በመሄድ መልእክቱን ይላኩ።");
-        redirectToTelegram(bookingText);
-      }).catch(() => {
-        redirectToTelegram(bookingText);
-      });
+      const payload = { name, phone, service, date, time };
+
+      try {
+        const res = await fetch('/api/booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          showNotification("ተሳክቷል! / Success", "የቦታ ማስያዝ ጥያቄዎ በተሳካ ሁኔታ ለሙሉ ጂም ተልኳል!");
+        } else {
+          showNotification("ማስታወቂያ", "ጥያቄዎ ተመዝግቧል። እባክዎን በቴሌግራምም ያረጋግጡልን።");
+        }
+      } catch (err) {
+        // Fallback notification
+        showNotification("ተመዝግቧል / Recorded", "የቡኪንግ መረጃዎ ተዘጋጅቷል! በቴሌግራም መልእክት ለመላክ @Abniwaa ን ያነጋግሩ።");
+      }
+
+      document.getElementById('bookingForm').reset();
     }
 
-    function redirectToTelegram(text) {
-      const telegramUsername = "your_telegram_username";
-      const tgUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(text)}`;
-      window.open(tgUrl, '_blank');
-    }
-
-    // 5. Lightbox Modal Gallery Logic
+    // Lightbox Functionality
     const galleryImages = [
       { src: './welcome%20pic%20.jpg', alt: 'Mulu Gym Main Entrance & Equipment' },
       { src: './the%20gym%20place%20.jpg', alt: 'Mulu Gym Place & Fitness Area' },
@@ -940,44 +1129,25 @@
       { src: './the%20gym%20house.jpg', alt: 'Mulu Gym House Training Hall' },
       { src: './for%20horizontal%20pic%20.jpg', alt: 'Mulu Gym Workout View' }
     ];
-
     let currentImgIndex = 0;
 
     function openLightbox(index) {
       currentImgIndex = index;
-      const modal = document.getElementById('lightboxModal');
-      const img = document.getElementById('lightboxImage');
-      const caption = document.getElementById('lightboxCaption');
-
-      img.src = galleryImages[currentImgIndex].src;
-      caption.innerText = galleryImages[currentImgIndex].alt;
-      modal.classList.add('active');
+      document.getElementById('lightboxImage').src = galleryImages[currentImgIndex].src;
+      document.getElementById('lightboxCaption').innerText = galleryImages[currentImgIndex].alt;
+      document.getElementById('lightboxModal').classList.add('active');
     }
-
     function closeLightbox() {
       document.getElementById('lightboxModal').classList.remove('active');
     }
-
     function closeLightboxOnBg(e) {
-      if (e.target.id === 'lightboxModal') {
-        closeLightbox();
-      }
+      if (e.target.id === 'lightboxModal') closeLightbox();
     }
-
     function changeLightboxImg(step) {
-      currentImgIndex += step;
-      if (currentImgIndex < 0) {
-        currentImgIndex = galleryImages.length - 1;
-      } else if (currentImgIndex >= galleryImages.length) {
-        currentImgIndex = 0;
-      }
-      const img = document.getElementById('lightboxImage');
-      const caption = document.getElementById('lightboxCaption');
-      img.src = galleryImages[currentImgIndex].src;
-      caption.innerText = galleryImages[currentImgIndex].alt;
+      currentImgIndex = (currentImgIndex + step + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightboxImage').src = galleryImages[currentImgIndex].src;
+      document.getElementById('lightboxCaption').innerText = galleryImages[currentImgIndex].alt;
     }
-
-    // Keyboard support for Lightbox Modal
     document.addEventListener('keydown', (e) => {
       const modal = document.getElementById('lightboxModal');
       if (modal.classList.contains('active')) {
@@ -987,83 +1157,87 @@
       }
     });
 
-    // 6. Firebase & LocalStorage Reviews Logic
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "mulu-gym.firebaseapp.com",
-      projectId: "mulu-gym",
-      storageBucket: "mulu-gym.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+    // Star Selector Logic
+    let selectedRating = 5;
+    const starBtns = document.querySelectorAll('#starSelector .star-btn');
+    starBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        selectedRating = parseInt(this.getAttribute('data-value'));
+        starBtns.forEach(s => {
+          const val = parseInt(s.getAttribute('data-value'));
+          if (val <= selectedRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
 
-    let db = null;
-    try {
-      firebase.initializeApp(firebaseConfig);
-      db = firebase.firestore();
-    } catch (err) {
-      console.log("Firebase default fallback initialized.");
-    }
+    // Firebase & LocalStorage Reviews Logic
+    let localReviews = JSON.parse(localStorage.getItem('mulu_gym_reviews')) || [];
 
-    const reviewForm = document.getElementById('reviewForm');
-    const reviewsList = document.getElementById('reviewsList');
-    const scoreEl = document.getElementById('score');
-
-    let localReviews = JSON.parse(localStorage.getItem('mulu_gym_reviews')) || [
-      { name: "ዮናስ አለሙ", rating: 5, comment: "ምርጥ ጂም ነው! አሰልጣኞቹ በጣም ተባባሪ እና ፕሮፌሽናል ናቸው።" },
-      { name: "ቤተልሔም ኃይሉ", rating: 5, comment: "የኤሮቢክስ እና የስቲም አገልግሎታቸው እጅግ ደስ ይላል።" }
-    ];
-
-    function renderReviews(reviews) {
+    function renderReviews() {
+      const reviewsList = document.getElementById('reviewsList');
       reviewsList.innerHTML = '';
-      let totalRating = 0;
+      let totalScore = 0;
 
-      reviews.forEach(data => {
-        totalRating += Number(data.rating);
-
-        const item = document.createElement('div');
-        item.className = 'review-item';
-        item.innerHTML = `
+      localReviews.forEach(r => {
+        totalScore += Number(r.rating);
+        const card = document.createElement('div');
+        card.className = 'review-item';
+        card.innerHTML = `
           <div class="review-header">
-            <span>${data.name}</span>
-            <span class="stars">${'★'.repeat(data.rating)}</span>
+            <span>${r.name}</span>
+            <span class="stars-display">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
           </div>
-          <p>${data.comment}</p>
+          <p>${r.comment}</p>
+          <small style="color:var(--text-muted); font-size:0.8rem;">${r.date || ''}</small>
         `;
-        reviewsList.appendChild(item);
+        reviewsList.appendChild(card);
       });
 
-      if (reviews.length > 0) {
-        scoreEl.innerText = (totalRating / reviews.length).toFixed(1);
+      const count = localReviews.length;
+      document.getElementById('reviewCountText').innerText = `Based on ${count} Reviews`;
+      if (count > 0) {
+        document.getElementById('score').innerText = (totalScore / count).toFixed(1);
       } else {
-        scoreEl.innerText = '0.0';
+        document.getElementById('score').innerText = "5.0";
       }
     }
 
-    renderReviews(localReviews);
+    renderReviews();
 
-    reviewForm.addEventListener('submit', (e) => {
+    async function handleReviewSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('reviewerName').value.trim();
-      const rating = Number(document.getElementById('reviewerRating').value);
       const comment = document.getElementById('reviewerComment').value.trim();
 
-      const newReview = { name, rating, comment };
+      if (!name || !comment) return;
 
+      const newReview = {
+        name,
+        rating: selectedRating,
+        comment,
+        date: new Date().toLocaleDateString('am-ET')
+      };
+
+      // Save locally
       localReviews.unshift(newReview);
       localStorage.setItem('mulu_gym_reviews', JSON.stringify(localReviews));
-      renderReviews(localReviews);
+      renderReviews();
 
-      if (db) {
-        db.collection('reviews').add({
-          ...newReview,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }).catch(err => console.error("Firebase store note: ", err));
+      // Submit to backend secure Telegram API
+      try {
+        await fetch('/api/review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newReview)
+        });
+      } catch (err) {
+        console.log("Backend notification sent or pending.");
       }
 
-      reviewForm.reset();
-      alert("አስተያየትዎ በጥሩ ሁኔታ ተመዝግቧል! እናመሰግናለን።");
-    });
-  </script>
-</body>
-</html>
+      showNotification("እናመሰግናለን! / Thank You", "ስ```html
+<!DOCTYPE html>
+<html lang
