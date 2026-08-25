@@ -1,585 +1,528 @@
-<html lang="en" class="dark scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRON FORGE | Luxury Gym & Combat Sports</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#050505',
-                            card: '#0D0D0D',
-                            yellow: '#FFD400',
-                            red: '#E10600',
-                            gray: '#A0A0A0',
-                            border: '#222222'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Google Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mulu Gym - ፊቱነስ እና ጂም</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-    <style>
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, h4, .font-display { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-        .glow-yellow { box-shadow: 0 0 25px rgba(255, 212, 0, 0.25); }
-        .glow-red { box-shadow: 0 0 25px rgba(225, 6, 0, 0.25); }
-        .glass-panel { background: rgba(13, 13, 13, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glass-card { background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(8px); border: 1px solid #222222; transition: all 0.3s ease; }
-        .glass-card:hover { border-color: #FFD400; transform: translateY(-3px); }
-        .gold-gradient-text { background: linear-gradient(135deg, #FFFFFF 0%, #FFD400 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    </style>
+  <style>
+    :root {
+      --primary-color: #ff4500;
+      --secondary-color: #111111;
+      --accent-color: #222222;
+      --light-bg: #0d0d0d;
+      --card-bg: #1a1a1a;
+      --white: #ffffff;
+      --text-gray: #cccccc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    header {
+      background: var(--secondary-color);
+      color: var(--white);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    .lang-btn {
+      background: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Hero Section (Gym Place PNG Background) */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('gym place.png') center/cover no-repeat;
+      height: 85vh;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      color: var(--text-gray);
+    }
+
+    .btn {
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 12px 28px;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #e03e00;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: var(--primary-color);
+      display: block;
+      margin: 8px auto 0;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #222;
+    }
+
+    .service-card i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: var(--text-gray);
+    }
+
+    /* Gallery (Gym Place PNG) */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s;
+      border: 1px solid #222;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Reviews Section */
+    .reviews-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #222;
+    }
+
+    .avg-rating {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ቢጫ ከለር ተነስቶ በ Orange ተክቷል */
+    .stars {
+      color: var(--primary-color);
+    }
+
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 2rem;
+    }
+
+    .review-form input, .review-form textarea, .review-form select {
+      padding: 12px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 4px;
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    .reviews-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .review-item {
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    /* Contact & Telegram */
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.1rem;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .telegram-btn {
+      background: #0088cc;
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      width: fit-content;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 280px;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--secondary-color);
+      color: var(--text-gray);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
-<body class="selection:bg-brand-yellow selection:text-black antialiased">
+<body>
 
-    <!-- NAVIGATION HEADER -->
-    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-brand-border/50">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-brand-yellow flex items-center justify-center rounded-sm">
-                    <i class="fa-solid fa-dumbbell text-black text-xl"></i>
-                </div>
-                <span class="font-display text-2xl font-bold tracking-wider text-white">IRON <span class="text-brand-yellow">FORGE</span></span>
-            </a>
-
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wider text-gray-300">
-                <a href="#programs" id="navPrograms" class="hover:text-brand-yellow">PROGRAMS</a>
-                <a href="#about" id="navAbout" class="hover:text-brand-yellow">ABOUT</a>
-                <a href="#pricing" id="navPricing" class="hover:text-brand-yellow">MEMBERSHIP</a>
-                <a href="#contact" id="navContact" class="hover:text-brand-yellow">CONTACT</a>
-            </nav>
-
-            <div class="flex items-center gap-3">
-                <!-- LANGUAGE TOGGLE BUTTON -->
-                <button onclick="toggleLanguage()" class="px-3 py-1.5 bg-brand-card border border-brand-yellow/50 text-brand-yellow font-bold text-xs rounded hover:bg-brand-yellow hover:text-black transition">
-                    <i class="fa-solid fa-globe mr-1"></i><span id="langBtnText">አማርኛ</span>
-                </button>
-
-                <button onclick="openRegistrationModal()" id="navJoinBtn" class="px-5 py-2.5 bg-brand-yellow text-black font-display font-bold text-sm tracking-wider rounded hover:bg-yellow-400 glow-yellow">
-                    JOIN NOW
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter brightness-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/60 to-transparent"></div>
-        </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h1 id="heroTitle" class="text-4xl sm:text-7xl font-display font-extrabold tracking-tight text-white mb-6">
-                FORGE YOUR <br><span class="gold-gradient-text">STRENGTH & LEGACY</span>
-            </h1>
-            <p id="heroDesc" class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">Elite Boxing, Muay Thai, Aerobics and General Fitness. Train with passion, dominate your goals.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="openRegistrationModal()" id="heroRegBtn" class="px-8 py-4 bg-brand-yellow text-black font-display font-bold text-lg rounded glow-yellow">REGISTER NOW</button>
-                <a href="#pricing" id="heroPriceBtn" class="px-8 py-4 bg-brand-red text-white font-display font-bold text-lg rounded glow-red">PRICING PLANS</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROGRAMS SECTION -->
-    <section id="programs" class="py-20 bg-brand-black">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 id="programsTitle" class="text-3xl font-display font-bold text-center text-white mb-12">OUR TRAINING PROGRAMS</h2>
-            <div id="programsContainer" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
-        </div>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="py-20 bg-brand-card">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 id="pricingTitle" class="text-3xl font-display font-bold text-center text-white mb-12">MEMBERSHIP PACKAGES</h2>
-            <div id="pricingContainer" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-brand-black py-8 border-t border-brand-border text-center text-gray-500 text-xs">
-        <p>© 2026 IRON FORGE GYM. ALL RIGHTS RESERVED.</p>
-        <button onclick="openAdminModal()" class="mt-2 text-brand-yellow underline"><i class="fa-solid fa-lock text-xs mr-1"></i> Admin Portal</button>
-    </footer>
-
-    <!-- DIGITAL REGISTRATION MODAL -->
-    <div id="registrationModal" class="fixed inset-0 z-50 hidden bg-brand-black/95 backdrop-blur-xl overflow-y-auto">
-        <div class="min-h-screen px-4 py-8 flex items-center justify-center">
-            <div class="max-w-xl w-full glass-panel border border-brand-yellow/40 rounded p-6 sm:p-8 relative">
-                
-                <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-
-                <div id="registrationFormContainer">
-                    <h2 id="modalTitle" class="text-2xl font-display font-bold text-center text-white mb-6">GYM REGISTRATION FORM</h2>
-                    <form onsubmit="handleRegistrationSubmit(event)" class="space-y-4">
-                        <div>
-                            <label id="lblProgram" class="block text-xs font-bold text-gray-300 mb-1">SELECTED PROGRAM</label>
-                            <select id="regProgram" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                                <option value="Boxing">🥊 Boxing</option>
-                                <option value="Muay Thai">🥋 Muay Thai</option>
-                                <option value="Aerobics & Fitness">🏃 Aerobics & Fitness</option>
-                                <option value="General Gym">💪 General Gym</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label id="lblName" class="block text-xs font-bold text-gray-300 mb-1">FULL NAME *</label>
-                            <input type="text" id="regName" required placeholder="John Doe" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label id="lblPhone" class="block text-xs font-bold text-gray-300 mb-1">PHONE *</label>
-                                <input type="tel" id="regPhone" required placeholder="09..." class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label id="lblAge" class="block text-xs font-bold text-gray-300 mb-1">AGE *</label>
-                                <input type="number" id="regAge" required placeholder="22" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label id="lblGender" class="block text-xs font-bold text-gray-300 mb-1">GENDER *</label>
-                            <select id="regGender" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                                <option value="Male">Male / ወንድ</option>
-                                <option value="Female">Female / ሴት</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label id="lblPlan" class="block text-xs font-bold text-gray-300 mb-1">MEMBERSHIP PLAN *</label>
-                            <select id="regPlan" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white"></select>
-                        </div>
-
-                        <div>
-                            <label id="lblEmergency" class="block text-xs font-bold text-gray-300 mb-1">EMERGENCY CONTACT NAME & PHONE *</label>
-                            <input type="text" id="regEmergency" required placeholder="Name & Phone" class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white">
-                        </div>
-
-                        <button id="submitBtn" type="submit" class="w-full py-3 bg-brand-yellow text-black font-display font-bold text-sm rounded glow-yellow uppercase mt-4">
-                            SUBMIT REGISTRATION
-                        </button>
-                    </form>
-                </div>
-
-                <!-- SUCCESS SCREEN AFTER REGISTRATION -->
-                <div id="regSuccessScreen" class="hidden text-center py-6 space-y-6">
-                    <div class="w-16 h-16 bg-brand-yellow/20 border-2 border-brand-yellow rounded-full flex items-center justify-center mx-auto text-brand-yellow text-3xl">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-
-                    <div>
-                        <h3 id="succHeader" class="text-2xl font-display font-bold text-white">REGISTRATION SUCCESSFUL!</h3>
-                        <p id="succSub" class="text-sm text-gray-300 mt-2 font-semibold">
-                            Your details have been submitted to the admin via Telegram.
-                        </p>
-                    </div>
-
-                    <div class="p-4 bg-brand-black border border-brand-border rounded text-left text-xs space-y-2">
-                        <p><span id="succIdLbl" class="text-gray-400">Reg ID:</span> <span id="resRegId" class="text-brand-yellow font-bold"></span></p>
-                        <p><span id="succNameLbl" class="text-gray-400">Name:</span> <span id="resName" class="text-white font-bold"></span></p>
-                        <p><span id="succProgLbl" class="text-gray-400">Program:</span> <span id="resProgram" class="text-white font-bold"></span></p>
-                    </div>
-
-                    <button onclick="closeRegistrationModal()" id="succDoneBtn" class="w-full py-3 bg-brand-yellow text-black font-bold text-xs uppercase rounded glow-yellow">
-                        DONE
-                    </button>
-                </div>
-
-            </div>
-        </div>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="logo">
+      <img src="logo pic .png" alt="Mulu Gym Logo" onerror="this.src='https://via.placeholder.com/40'" />
+      Mulu Gym
     </div>
+    <nav>
+      <ul>
+        <li><a href="#home" data-en="Home" data-am="መነሻ">Home</a></li>
+        <li><a href="#services" data-en="Services" data-am="አገልግሎቶች">Services</a></li>
+        <li><a href="#gallery" data-en="Gallery" data-am="ፎቶዎች">Gallery</a></li>
+        <li><a href="#reviews" data-en="Reviews" data-am="አስተያየቶች">Reviews</a></li>
+        <li><a href="#contact" data-en="Contact" data-am="አድራሻ">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="lang-btn" onclick="toggleLanguage()">አማርኛ</button>
+  </header>
 
-    <!-- ADMIN PANEL MODAL -->
-    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-brand-black/95 backdrop-blur-xl overflow-y-auto">
-        <div class="min-h-screen px-4 py-8">
-            <div class="max-w-5xl mx-auto flex justify-between items-center pb-6 border-b border-brand-border">
-                <h2 class="text-2xl font-display font-bold text-white">IRON FORGE <span class="text-brand-yellow">ADMIN PANEL</span></h2>
-                <button onclick="closeAdminModal()" class="px-4 py-1.5 bg-brand-card border border-brand-border text-xs text-gray-300 rounded">Exit Admin</button>
-            </div>
+  <!-- Hero Section -->
+  <div class="hero" id="home">
+    <h1 data-en="Welcome to Mulu Gym" data-am="እንኳን ወደ ሙሉ ጂም በደህና መጡ">Welcome to Mulu Gym</h1>
+    <p data-en="Transform your body and mind with our modern equipment and professional trainers." data-am="በዘመናዊ የጂም መሣሪያዎቻችን እና በባለሙያ አሰልጣኞቻችን ጤናዎንና ሰውነትዎን ይገንቡ።">Transform your body and mind with our modern equipment and professional trainers.</p>
+    <a href="#contact" class="btn" data-en="Join Us Today" data-am="ዛሬውኑ ይቀላቀሉን">Join Us Today</a>
+  </div>
 
-            <!-- LOGIN FORM -->
-            <div id="adminLoginView" class="max-w-md mx-auto my-16 glass-panel p-6 rounded space-y-4">
-                <h3 class="text-xl font-display font-bold text-center">ADMIN AUTHENTICATION</h3>
-                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">ENTER ADMIN PASSWORD</label>
-                        <input type="password" id="adminPassInput" required class="w-full bg-brand-black border border-brand-border rounded px-3 py-2 text-sm text-white focus:border-brand-yellow">
-                    </div>
-                    <button type="submit" class="w-full py-2.5 bg-brand-yellow text-black font-bold text-xs uppercase rounded glow-yellow">LOGIN</button>
-                </form>
-            </div>
-
-            <!-- DASHBOARD MAIN PANEL -->
-            <div id="adminMainDashboard" class="max-w-5xl mx-auto pt-6 space-y-8 hidden">
-                
-                <!-- CHANGE PRICES SECTION -->
-                <div class="glass-card p-6 rounded space-y-4">
-                    <h3 class="font-display font-bold text-lg text-brand-yellow">1. የጂም ክፍያዎችን ማስተካከያ (MEMBERSHIP PRICES)</h3>
-                    <div id="adminPriceEditorContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-                    <button onclick="saveAdminPrices()" class="px-6 py-2 bg-brand-yellow text-black font-bold text-xs rounded">Save Prices</button>
-                </div>
-
-                <!-- CHANGE PASSWORD SECTION -->
-                <div class="glass-card p-6 rounded space-y-4">
-                    <h3 class="font-display font-bold text-lg text-brand-red">2. የአድሚን ፓስወርድ ማስተካከያ (CHANGE PASSWORD)</h3>
-                    <div class="max-w-md space-y-3">
-                        <input type="password" id="newAdminPass" placeholder="አዲስ ፓስወርድ ያስገቡ" class="w-full bg-brand-black border border-brand-border px-3 py-2 text-sm rounded text-white">
-                        <button onclick="changeAdminPassword()" class="px-6 py-2 bg-brand-red text-white font-bold text-xs rounded">Update Password</button>
-                    </div>
-                </div>
-
-                <!-- REGISTRATIONS TABLE -->
-                <div class="glass-card p-6 rounded space-y-4">
-                    <h3 class="font-display font-bold text-lg text-white">3. የተመዘገቡ አባላት ዝርዝር (REGISTRATIONS)</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-gray-300">
-                            <thead class="bg-brand-black text-brand-yellow uppercase">
-                                <tr>
-                                    <th class="p-2">ID</th>
-                                    <th class="p-2">ስም</th>
-                                    <th class="p-2">ስልክ</th>
-                                    <th class="p-2">ፕሮግራም</th>
-                                    <th class="p-2">ፓኬጅ</th>
-                                    <th class="p-2">ቀን</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminRegsTable" class="divide-y divide-brand-border"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+  <!-- Services Section -->
+  <section id="services">
+    <h2 class="section-title" data-en="Our Services" data-am="አገልግሎቶቻችን">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fa-solid fa-dumbbell"></i>
+        <h3 data-en="Bodybuilding" data-am="የሰውነት ግንባታ">Bodybuilding</h3>
+        <p data-en="Complete weight training facilities for all levels." data-am="ለማንኛውም ደረጃ የሚሆኑ የተሟሉ የክብደት ማነሻ መሣሪያዎች።">Complete weight training facilities for all levels.</p>
+      </div>
+      <div class="service-card">
+        <i class="fa-solid fa-heart-pulse"></i>
+        <h3 data-en="Cardio Fitness" data-am="ካርዲዮ እና ፊቱነስ">Cardio Fitness</h3>
+        <p data-en="Treadmills, bikes, and endurance building tools." data-am="የሩጫ መሣሪያዎች፣ ብስክሌቶች እና የጽናት ማዳበሪያዎች።">Treadmills, bikes, and endurance building tools.</p>
+      </div>
+      <div class="service-card">
+        <i class="fa-solid fa-user-ninja"></i>
+        <h3 data-en="Personal Trainer" data-am="የግል አሰልጣኝ">Personal Trainer</h3>
+        <p data-en="One-on-one professional guidance tailored for you." data-am="ለእርስዎ የተዘጋጀ የቅርብ የሙያ አሰልጠና እና ክትትል ።">One-on-one professional guidance tailored for you.</p>
+      </div>
     </div>
+  </section>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        let currentLang = 'en'; // Default language
+  <!-- Gallery Section -->
+  <section id="gallery">
+    <h2 class="section-title" data-en="Gym Gallery" data-am="የጂሙ ገጽታ">Gym Gallery</h2>
+    <div class="gallery-grid">
+      <!-- gym place.png ን እዚህ ጋር ይጠቀማል -->
+      <img src="gym place.png" alt="Mulu Gym Place" onerror="this.src='https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500'" />
+      <img src="gym place.png" alt="Gym Area" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500'" />
+      <img src="gym place.png" alt="Equipments" onerror="this.src='https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500'" />
+    </div>
+  </section>
 
-        // System State
-        let adminPassword = "123gym456";
+  <!-- Customer Reviews -->
+  <section id="reviews">
+    <h2 class="section-title" data-en="Customer Reviews" data-am="የደንበኞች አስተያየት">Customer Reviews</h2>
+    <div class="reviews-container">
+      <div class="avg-rating" id="avgRating">
+        <span data-en="Average Rating:" data-am="አማካይ ደረጃ፡">Average Rating:</span> 
+        <span id="score">0.0</span> <span class="stars">★</span>
+      </div>
 
-        let state = {
-            programs: [
-                { title: 'BOXING', titleAm: 'ቦክስ (BOXING)', desc: 'Professional boxing conditioning and ring technique.', descAm: 'የባለሙያ ቦክስ ስልጠና እና ቴክኒክ።', img: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=600&auto=format&fit=crop' },
-                { title: 'MUAY THAI', titleAm: 'ሙአይ ታይ (MUAY THAI)', desc: 'Authentic 8-limbs combat discipline.', descAm: 'ትክክለኛው የሙአይ ታይ ውጊያ ስልጠና።', img: 'https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=600&auto=format&fit=crop' },
-                { title: 'AEROBICS & FITNESS', titleAm: 'ኤሮቢክስ (AEROBICS)', desc: 'HIIT cardio fat burn and rhythm workout.', descAm: 'የስብ ማቃጠል እና የልብ ጤንነት ስልጠና።', img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop' },
-                { title: 'GENERAL GYM', titleAm: 'ጀነራል ጂም (FITNESS)', desc: 'Strength training and body building.', descAm: 'የሰውነት ግንባታ እና የጥንካሬ ስልጠና።', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop' }
-            ],
-            pricing: [
-                { id: 'm1', name: 'MONTHLY', nameAm: 'የ 1 ወር', price: '2,500 ETB' },
-                { id: 'm3', name: '3 MONTHS', nameAm: 'የ 3 ወር', price: '6,800 ETB' },
-                { id: 'm6', name: '6 MONTHS', nameAm: 'የ 6 ወር', price: '12,500 ETB' },
-                { id: 'm12', name: 'YEARLY', nameAm: 'የ 1 ዓመት', price: '22,000 ETB' }
-            ],
-            registrations: []
-        };
+      <!-- Form -->
+      <form class="review-form" id="reviewForm">
+        <input type="text" id="reviewerName" placeholder="Your Name / ስምዎን ያስገቡ" required />
+        <select id="reviewerRating" required>
+          <option value="5">5 Stars (እጅግ በጣም ጥሩ)</option>
+          <option value="4">4 Stars (በጣም ጥሩ)</option>
+          <option value="3">3 Stars (ጥሩ)</option>
+          <option value="2">2 Stars (መካከለኛ)</option>
+          <option value="1">1 Star (ዝቅተኛ)</option>
+        </select>
+        <textarea id="reviewerComment" rows="3" placeholder="Write your review... / አስተያየትዎን እዚህ ይጻፉ..." required></textarea>
+        <button type="submit" class="btn" data-en="Submit Review" data-am="አስተያየት ላክ">Submit Review</button>
+      </form>
 
-        const translations = {
-            en: {
-                langBtn: "አማርኛ",
-                navPrograms: "PROGRAMS",
-                navAbout: "ABOUT",
-                navPricing: "MEMBERSHIP",
-                navContact: "CONTACT",
-                navJoinBtn: "JOIN NOW",
-                heroTitle: 'FORGE YOUR <br><span class="gold-gradient-text">STRENGTH & LEGACY</span>',
-                heroDesc: "Elite Boxing, Muay Thai, Aerobics and General Fitness. Train with passion, dominate your goals.",
-                heroRegBtn: "REGISTER NOW",
-                heroPriceBtn: "PRICING PLANS",
-                programsTitle: "OUR TRAINING PROGRAMS",
-                pricingTitle: "MEMBERSHIP PACKAGES",
-                modalTitle: "GYM REGISTRATION FORM",
-                lblProgram: "SELECTED PROGRAM",
-                lblName: "FULL NAME *",
-                lblPhone: "PHONE *",
-                lblAge: "AGE *",
-                lblGender: "GENDER *",
-                lblPlan: "MEMBERSHIP PLAN *",
-                lblEmergency: "EMERGENCY CONTACT NAME & PHONE *",
-                submitBtn: "SUBMIT REGISTRATION",
-                succHeader: "REGISTRATION SUCCESSFUL!",
-                succSub: "Your details have been submitted to the admin via Telegram.",
-                succIdLbl: "Reg ID:",
-                succNameLbl: "Name:",
-                succProgLbl: "Program:",
-                succDoneBtn: "DONE",
-                cardRegBtn: "REGISTER",
-                cardChooseBtn: "CHOOSE PLAN"
-            },
-            am: {
-                langBtn: "English",
-                navPrograms: "ፕሮግራሞች",
-                navAbout: "ስለ እኛ",
-                navPricing: "አባልነት",
-                navContact: "አድራሻ",
-                navJoinBtn: "አሁኑኑ ተመዝገብ",
-                heroTitle: 'ጥንካሬዎትን <br><span class="gold-gradient-text">እዚህ ይገንቡ</span>',
-                heroDesc: "ቦክስ፣ ሙአይ ታይ፣ ኤሮቢክስ እና የሰውነት ማሰልጠኛ ጂም። በቁርጠኝነት ይሰልጥኑ፣ ግብዎን ያሳኩ።",
-                heroRegBtn: "አሁኑኑ ይመዝገቡ",
-                heroPriceBtn: "የክፍያ አማራጮች",
-                programsTitle: "የስልጠና ፕሮግራሞቻችን",
-                pricingTitle: "የአባልነት ክፍያ ፓኬጆች",
-                modalTitle: "የጂም ምዝገባ ቅጽ",
-                lblProgram: "የመረጡት ፕሮግራም",
-                lblName: "ሙሉ ስም *",
-                lblPhone: "ስልክ ቁጥር *",
-                lblAge: "እድሜ *",
-                lblGender: "ጾታ *",
-                lblPlan: "የአባልነት ዓይነት *",
-                lblEmergency: "የአደጋ ጊዜ ተጠሪ ስምና ስልክ *",
-                submitBtn: "ምዝገባውን ላክ",
-                succHeader: "ምዝገባዎ በተሳካ ሁኔታ ተጠናቋል!",
-                succSub: "መረጃዎ ቀጥታ ወደ አድሚን ተልኳል።",
-                succIdLbl: "የምዝገባ መለያ ID:",
-                succNameLbl: "ስም:",
-                succProgLbl: "ፕሮግራም:",
-                succDoneBtn: "ጨርስ",
-                cardRegBtn: "ተመዝገብ",
-                cardChooseBtn: "ምረጥ"
-            }
-        };
+      <!-- Reviews Display List -->
+      <div class="reviews-list" id="reviewsList">
+      </div>
+    </div>
+  </section>
 
-        document.addEventListener("DOMContentLoaded", function() {
-            renderPageContent();
-        });
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section-title" data-en="Contact Us & Location" data-am="አድራሻችን እና ቦታ">Contact Us & Location</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Addis Ababa, Ethiopia / አዲስ አበባ፣ ኢትዮጵያ</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+251 900 000 000</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>info@mulugym.com</span>
+        </div>
+        
+        <!-- Telegram Link -->
+        <a href="https://t.me/your_telegram_username" target="_blank" class="telegram-btn">
+          <i class="fa-brands fa-telegram"></i> Join Telegram Channel
+        </a>
+      </div>
 
-        function toggleLanguage() {
-            currentLang = (currentLang === 'en') ? 'am' : 'en';
-            renderPageContent();
-        }
+      <!-- Location Map -->
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126105.71714041797!2d38.7062438!3d9.0107934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
 
-        function renderPageContent() {
-            const t = translations[currentLang];
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Mulu Gym. All Rights Reserved. | 🚀 Developed by Yisshak</p>
+  </footer>
 
-            document.getElementById('langBtnText').innerText = t.langBtn;
-            document.getElementById('navPrograms').innerText = t.navPrograms;
-            document.getElementById('navAbout').innerText = t.navAbout;
-            document.getElementById('navPricing').innerText = t.navPricing;
-            document.getElementById('navContact').innerText = t.navContact;
-            document.getElementById('navJoinBtn').innerText = t.navJoinBtn;
+  <!-- Firebase & Language Script -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "mulu-gym.firebaseapp.com",
+      projectId: "mulu-gym",
+      storageBucket: "mulu-gym.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-            document.getElementById('heroTitle').innerHTML = t.heroTitle;
-            document.getElementById('heroDesc').innerText = t.heroDesc;
-            document.getElementById('heroRegBtn').innerText = t.heroRegBtn;
-            document.getElementById('heroPriceBtn').innerText = t.heroPriceBtn;
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-            document.getElementById('programsTitle').innerText = t.programsTitle;
-            document.getElementById('pricingTitle').innerText = t.pricingTitle;
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewsList = document.getElementById('reviewsList');
+    const scoreEl = document.getElementById('score');
 
-            document.getElementById('modalTitle').innerText = t.modalTitle;
-            document.getElementById('lblProgram').innerText = t.lblProgram;
-            document.getElementById('lblName').innerText = t.lblName;
-            document.getElementById('lblPhone').innerText = t.lblPhone;
-            document.getElementById('lblAge').innerText = t.lblAge;
-            document.getElementById('lblGender').innerText = t.lblGender;
-            document.getElementById('lblPlan').innerText = t.lblPlan;
-            document.getElementById('lblEmergency').innerText = t.lblEmergency;
-            document.getElementById('submitBtn').innerText = t.submitBtn;
+    db.collection('reviews').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+      reviewsList.innerHTML = '';
+      let totalRating = 0;
+      let count = snapshot.docs.length;
 
-            document.getElementById('succHeader').innerText = t.succHeader;
-            document.getElementById('succSub').innerText = t.succSub;
-            document.getElementById('succIdLbl').innerText = t.succIdLbl;
-            document.getElementById('succNameLbl').innerText = t.succNameLbl;
-            document.getElementById('succProgLbl').innerText = t.succProgLbl;
-            document.getElementById('succDoneBtn').innerText = t.succDoneBtn;
+      snapshot.docs.forEach(doc => {
+        const data = doc.data();
+        totalRating += Number(data.rating);
 
-            renderPrograms();
-            renderPricing();
-            populatePlanOptions();
-        }
+        const item = document.createElement('div');
+        item.className = 'review-item';
+        item.innerHTML = `
+          <div class="review-header">
+            <span>${data.name}</span>
+            <span class="stars">${'★'.repeat(data.rating)}</span>
+          </div>
+          <p>${data.comment}</p>
+        `;
+        reviewsList.appendChild(item);
+      });
 
-        function renderPrograms() {
-            const t = translations[currentLang];
-            document.getElementById('programsContainer').innerHTML = state.programs.map(p => `
-                <div class="glass-card rounded overflow-hidden p-4 space-y-3">
-                    <img src="${p.img}" class="w-full h-36 object-cover rounded">
-                    <h3 class="font-display font-bold text-lg text-white">${currentLang === 'am' ? p.titleAm : p.title}</h3>
-                    <p class="text-xs text-gray-400">${currentLang === 'am' ? p.descAm : p.desc}</p>
-                    <button onclick="openRegistrationModal('${p.title}')" class="w-full py-2 bg-brand-yellow text-black font-bold text-xs rounded">${t.cardRegBtn}</button>
-                </div>
-            `).join('');
-        }
+      if (count > 0) {
+        scoreEl.innerText = (totalRating / count).toFixed(1);
+      } else {
+        scoreEl.innerText = '0.0';
+      }
+    });
 
-        function renderPricing() {
-            const t = translations[currentLang];
-            document.getElementById('pricingContainer').innerHTML = state.pricing.map(p => `
-                <div class="glass-card p-6 rounded text-center space-y-3">
-                    <h3 class="font-display font-bold text-xl text-white">${currentLang === 'am' ? p.nameAm : p.name}</h3>
-                    <div class="text-2xl font-bold text-brand-yellow">${p.price}</div>
-                    <button onclick="openRegistrationModal(null, '${p.name}')" class="w-full py-2 bg-brand-red text-white font-bold text-xs rounded">${t.cardChooseBtn}</button>
-                </div>
-            `).join('');
-        }
+    reviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('reviewerName').value;
+      const rating = Number(document.getElementById('reviewerRating').value);
+      const comment = document.getElementById('reviewerComment').value;
 
-        function populatePlanOptions() {
-            document.getElementById('regPlan').innerHTML = state.pricing.map(p => `
-                <option value="${p.name} (${p.price})">${currentLang === 'am' ? p.nameAm : p.name} - ${p.price}</option>
-            `).join('');
-        }
+      db.collection('reviews').add({
+        name: name,
+        rating: rating,
+        comment: comment,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        reviewForm.reset();
+      }).catch(err => console.error("Error adding review: ", err));
+    });
 
-        function openRegistrationModal(program = null, plan = null) {
-            document.getElementById('registrationModal').classList.remove('hidden');
-            document.getElementById('registrationFormContainer').classList.remove('hidden');
-            document.getElementById('regSuccessScreen').classList.add('hidden');
-            if (program) document.getElementById('regProgram').value = program;
-        }
+    let currentLang = 'en';
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'am' : 'en';
+      document.querySelector('.lang-btn').innerText = currentLang === 'en' ? 'አማርኛ' : 'English';
 
-        function closeRegistrationModal() {
-            document.getElementById('registrationModal').classList.add('hidden');
-        }
-
-        async function handleRegistrationSubmit(e) {
-            e.preventDefault();
-
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = currentLang === 'am' ? "እየላከ ነው..." : "SENDING...";
-            submitBtn.disabled = true;
-
-            const regData = {
-                id: 'IF-' + Math.floor(1000 + Math.random() * 9000),
-                name: document.getElementById('regName').value,
-                phone: document.getElementById('regPhone').value,
-                age: document.getElementById('regAge').value,
-                gender: document.getElementById('regGender').value,
-                program: document.getElementById('regProgram').value,
-                plan: document.getElementById('regPlan').value,
-                emergency: document.getElementById('regEmergency').value,
-                date: new Date().toLocaleDateString()
-            };
-
-            const success = await sendTelegramNotification(regData);
-
-            submitBtn.innerText = translations[currentLang].submitBtn;
-            submitBtn.disabled = false;
-
-            if (success) {
-                state.registrations.unshift(regData);
-
-                document.getElementById('registrationFormContainer').classList.add('hidden');
-                document.getElementById('regSuccessScreen').classList.remove('hidden');
-
-                document.getElementById('resRegId').innerText = regData.id;
-                document.getElementById('resName').innerText = regData.name;
-                document.getElementById('resProgram').innerText = `${regData.program} - ${regData.plan}`;
-            } else {
-                alert(currentLang === 'am' ? "መረጃውን መላክ አልተቻለም። እባክዎን ኢንተርኔትዎን ያረጋግጡ!" : "Failed to send registration. Please check your network connection!");
-            }
-        }
-
-        async function sendTelegramNotification(data) {
-            const botToken = "8752629354:AAEwRCOv5_SR4ynYGFZLgBD_b999E2SEpyA"; 
-            const chatId = "-1004466655656";
-            
-            const message = `🏋️ *አዲስ የጂም ምዝገባ (IRON FORGE)*\n\n` +
-                            `🆔 *ID:* ${data.id}\n` +
-                            `👤 *ስም:* ${data.name}\n` +
-                            `📞 *ስልክ:* ${data.phone}\n` +
-                            `🎂 *እድሜ:* ${data.age} | *ጾታ:* ${data.gender}\n` +
-                            `🥊 *ፕሮግራም:* ${data.program}\n` +
-                            `💳 *የክፍያ ፓኬጅ:* ${data.plan}\n` +
-                            `🚨 *የአደጋ ጊዜ ተጠሪ:* ${data.emergency}\n` +
-                            `📅 *ቀን:* ${data.date}`;
-
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-
-                const resData = await response.json();
-                return resData.ok;
-            } catch (err) {
-                console.error("Error sending to telegram", err);
-                return false;
-            }
-        }
-
-        // ADMIN FUNCTIONS
-        function openAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === adminPassword) {
-                document.getElementById('adminLoginView').classList.add('hidden');
-                document.getElementById('adminMainDashboard').classList.remove('hidden');
-                renderAdminView();
-            } else {
-                alert('የተሳሳተ ፓስወርድ ነው!');
-            }
-        }
-
-        function renderAdminView() {
-            document.getElementById('adminPriceEditorContainer').innerHTML = state.pricing.map((p, i) => `
-                <div class="p-3 bg-brand-black border border-brand-border rounded">
-                    <label class="block text-[10px] text-brand-yellow font-bold">${p.name}</label>
-                    <input type="text" id="adminPriceInput_${i}" value="${p.price}" class="w-full bg-brand-card border border-brand-border px-2 py-1 text-xs text-white rounded mt-1">
-                </div>
-            `).join('');
-
-            document.getElementById('adminRegsTable').innerHTML = state.registrations.map(r => `
-                <tr>
-                    <td class="p-2 font-bold text-brand-yellow">${r.id}</td>
-                    <td class="p-2 font-bold text-white">${r.name}</td>
-                    <td class="p-2">${r.phone}</td>
-                    <td class="p-2">${r.program}</td>
-                    <td class="p-2">${r.plan}</td>
-                    <td class="p-2">${r.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        function saveAdminPrices() {
-            state.pricing.forEach((p, i) => {
-                const val = document.getElementById(`adminPriceInput_${i}`).value;
-                if (val) p.price = val;
-            });
-            renderPricing();
-            populatePlanOptions();
-            alert('የጂም አባልነት ክፍያዎች በተሳካ ሁኔታ ተቀይረዋል!');
-        }
-
-        function changeAdminPassword() {
-            const newPass = document.getElementById('newAdminPass').value;
-            if (newPass.trim() !== '') {
-                adminPassword = newPass;
-                alert('የአድሚን ፓስወርድ በተሳካ ሁኔታ ተቀይሯል!');
-                document.getElementById('newAdminPass').value = '';
-            }
-        }
-    </script>
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${currentLang}`);
+      });
+    }
+  </script>
 </body>
 </html>
